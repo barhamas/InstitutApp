@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBLIAGEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="contact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="prenom" Type="nvarchar" MaxLength="50" />
+    <Property Name="fonction" Type="nvarchar" MaxLength="50" />
+    <Property Name="telephone" Type="nchar" MaxLength="14" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="institut_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Institut">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adresse" Type="text" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="site-web" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_contact_contact">
+    <End Role="Institut" Type="Self.Institut" Multiplicity="0..1" />
+    <End Role="contact" Type="Self.contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institut">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contact">
+        <PropertyRef Name="institut_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBLIAGEModelStoreContainer">
+    <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Institut" EntityType="Self.Institut" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_contact_contact" Association="Self.FK_contact_contact">
+      <End Role="Institut" EntitySet="Institut" />
+      <End Role="contact" EntitySet="contact" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

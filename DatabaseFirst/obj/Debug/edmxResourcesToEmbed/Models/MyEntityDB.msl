@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBLIAGEModelStoreContainer" CdmEntityContainer="DBLIAGEEntities">
+    <EntitySetMapping Name="contacts">
+      <EntityTypeMapping TypeName="DBLIAGEModel.contact">
+        <MappingFragment StoreEntitySet="contact">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="fonction" ColumnName="fonction" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="institut_id" ColumnName="institut_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instituts">
+      <EntityTypeMapping TypeName="DBLIAGEModel.Institut">
+        <MappingFragment StoreEntitySet="Institut">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="site_web" ColumnName="site-web" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

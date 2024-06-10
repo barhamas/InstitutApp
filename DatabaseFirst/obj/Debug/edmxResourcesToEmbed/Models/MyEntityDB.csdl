@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBLIAGEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="contact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fonction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="institut_id" Type="Int32" />
+    <NavigationProperty Name="Institut" Relationship="Self.FK_contact_contact" FromRole="contact" ToRole="Institut" />
+  </EntityType>
+  <EntityType Name="Institut">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="site_web" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="contacts" Relationship="Self.FK_contact_contact" FromRole="Institut" ToRole="contact" />
+  </EntityType>
+  <Association Name="FK_contact_contact">
+    <End Role="Institut" Type="Self.Institut" Multiplicity="0..1" />
+    <End Role="contact" Type="Self.contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institut">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contact">
+        <PropertyRef Name="institut_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBLIAGEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="contacts" EntityType="Self.contact" />
+    <EntitySet Name="Instituts" EntityType="Self.Institut" />
+    <AssociationSet Name="FK_contact_contact" Association="Self.FK_contact_contact">
+      <End Role="Institut" EntitySet="Instituts" />
+      <End Role="contact" EntitySet="contacts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
